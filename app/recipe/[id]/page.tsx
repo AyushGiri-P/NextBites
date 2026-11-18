@@ -1,15 +1,23 @@
 
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getRecipe } from "../../data/recipes";
-
-export const instant = false;
 
 type RecipePageProps = {
   params: Promise<{ id: string }>;
 };
 
-export default async function RecipePage({ params }: RecipePageProps) {
-  const { id } = await params;
+export default function RecipePage({ params }: RecipePageProps) {
+  return (
+    <Suspense fallback={<p>Loading recipe...</p>}>
+      {params.then(({ id }) => (
+        <RecipeContent id={id} />
+      ))}
+    </Suspense>
+  );
+}
+
+function RecipeContent({ id }: { id: string }) {
   const recipe = getRecipe(Number(id));
 
   if (!recipe) {
