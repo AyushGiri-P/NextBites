@@ -1,6 +1,7 @@
 
 import type { Metadata } from "next";
 import "./globals.css";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "NextBites",
@@ -16,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <nav className="navbar">
-          <a href="/" className="logo">NextBites</a>
+          <Link href="/" className="logo">NextBites</Link>
           <span>Discover • Cook • Enjoy</span>
         </nav>
 
